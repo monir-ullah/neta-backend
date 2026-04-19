@@ -4,8 +4,9 @@
   "main": "server.ts",
   "type": "module",
   "scripts": {
-    "start": "tsx server.ts",
-    "dev": "tsx watch server.ts"
+    "start": "npx tsx server.ts",
+    "dev": "npx tsx watch server.ts",
+    "build": "echo Build not needed for Render"
   },
   "keywords": [],
   "author": "",

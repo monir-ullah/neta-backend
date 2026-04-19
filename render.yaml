@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: location-tracker-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI_TEST
+        scope: build,runtime
+      - key: PORT
+        value: "10000"
+    healthCheckPath: /
