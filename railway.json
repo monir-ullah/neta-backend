@@ -1,0 +1,17 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "nixpacks",
+    "buildCommand": "npm install"
+  },
+  "deploy": {
+    "startCommand": "npm start",
+    "restartPolicyMaxRetries": 5,
+    "restartPolicyWindowSeconds": 600
+  },
+  "env": {
+    "MONGO_URI_TEST": "${{ secrets.MONGO_URI_TEST }}",
+    "PORT": "8080",
+    "NODE_ENV": "production"
+  }
+}
